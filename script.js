@@ -15,7 +15,21 @@ document.getElementById('show-password').addEventListener('change', function(eve
 });
 
 function checkPasswordStrength(password) {
-    // Bạn sẽ thêm thuật toán kiểm tra mật khẩu ở đây.
-    // Tạm thời, hàm này sẽ trả về "Strength: Weak".
-    return 'Strength: Weak';
+    const result = zxcvbn(password);
+    const score = result.score; // Điểm từ 0 đến 4
+
+    switch (score) {
+        case 0:
+        case 1:
+            return 'Strength: Weak';
+        case 2:
+            return 'Strength: Medium';
+        case 3:
+        case 4:
+            return 'Strength: Strong';
+        default:
+            return 'Strength: Unknown';
+    }
 }
+
+
